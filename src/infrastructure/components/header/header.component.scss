@@ -1,19 +1,8 @@
-.mat-mdc-text-field-wrapper {
-    background-color: var(--rm-blue)!important;
-    border: 2px solid var(--rm-dark-blue)!important;
+.cls-rick-and-morty {
+    width: 100%;
+    height: auto;
 }
-.host.app-header {
-    background-color: var(--rm-blue)!important;
-    border: 2px solid var(--rm-dark-blue)!important;
-}
-:host {
-    background-color: var(--rm-blue)!important;
-    border: 2px solid var(--rm-dark-blue)!important;
-    mat-form-field {
-        div.mat-mdc-text-field-wrapper.mdc-text-field--filled:not(.mdc-text-field--disabled){
-background-color: var(--rm-blue)!important;
-    border: 2px solid var(--rm-dark-blue)!important;
-        }
 
-}
+span>h2 {
+    text-wrap: nowrap;
 }

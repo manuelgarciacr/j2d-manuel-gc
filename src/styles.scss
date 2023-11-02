@@ -1,5 +1,6 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
+@use 'sass:map';
 @use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
@@ -8,63 +9,107 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$j2d-manuel-gc-primary: mat.define-palette(mat.$indigo-palette);
-$j2d-manuel-gc-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$j2d-manuel-gc-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$j2d-manuel-gc-theme: mat.define-light-theme(
-    (
-        color: (
-            primary: $j2d-manuel-gc-primary,
-            accent: $j2d-manuel-gc-accent,
-            warn: $j2d-manuel-gc-warn,
-        ),
-    )
-);
-
 // @use '../all-theme';
 // @use '../../core';
 // @use '../palette';
 // @use '../theming';
 // @use '../../typography/typography';
 
-
 // Include non-theme styles for core.
 // @include core.core();
 
 .mat-app-background {
-    --rm-blue: #04B1C9;
+    --rm-blue: #118595;
     --rm-dark-blue: #045945;
     --rm-green: #f4fc07;
 }
 
-// Define a theme.
-$dark-primary: mat.define-palette(mat.$purple-palette, 700, 500, 800);
-$dark-accent: mat.define-palette(mat.$green-palette, A200, A100, A400);
+$randm-palette: (
+    50: #e1f7fb,
+    100: #b4ecf5,
+    200: #83dfef,
+    300: #52d2e8,
+    400: #31c8e1,
+    500: #1ebfdb,
+    600: #1aafc8,
+    700: #159aad,
+    800: #118695,
+    900: #096369,
+    A100: #b4ecf5,
+    A200: #83dfef,
+    A400: #31c8e1,
+    A700: #159aad,
+    contrast: (
+        50: #000,
+        100: #000,
+        200: #000,
+        300: #000,
+        400: #000,
+        500: #000,
+        600: #fff,
+        700: #fff,
+        800: #fff,
+        900: #fff,
+        A100: #000,
+        A200: #000,
+        A400: #000,
+        A700: #fff,
+    ),
+);
 
-$dark-theme: mat.define-dark-theme(
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$default-primary: mat.define-palette($randm-palette, 800, 400, 900);
+$default-accent: mat.define-palette($randm-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$default-warn: mat.define-palette(mat.$red-palette);
+
+// Custom care and success palettes (defaults to amber and green).
+$default-care: mat.define-palette(mat.$amber-palette, 500, 400, 700);
+$bg-care: mat.get-color-from-palette($default-care, 500);
+$bg-care-contrast: mat.get-color-from-palette($default-care, "500-contrast");
+
+.mat-mdc-raised-button.mat-care {
+    --mdc-protected-button-container-color: #{$bg-care};
+    --mdc-protected-button-label-text-color: #{$bg-care-contrast};
+}
+
+$default-success: mat.define-palette(mat.$green-palette, 600, 500, 800);
+$bg-success: mat.get-color-from-palette($default-success, 600);
+$bg-success-contrast: mat.get-color-from-palette(
+    $default-success,
+    "600-contrast"
+);
+
+.mat-mdc-raised-button.mat-success {
+    --mdc-protected-button-container-color: #{$bg-success};
+    --mdc-protected-button-label-text-color: #{$bg-success-contrast};
+}
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$default-theme: mat.define-dark-theme(
     (
         color: (
-            primary: $dark-primary,
-            accent: $dark-accent,
+            primary: $default-primary,
+            accent: $default-accent,
+            warn: $default-warn,
+            care: $default-care,
+            success: $default-success,
         ),
         typography: mat.define-typography-config(),
         density: 0,
     )
 );
+
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 // Emit theme-dependent styles for common features used across multiple components.
-@include mat.core-theme($dark-theme);
-@include mat.all-component-themes($dark-theme);
+@include mat.core-theme($default-theme);
+@include mat.all-component-themes($default-theme);
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -79,14 +124,59 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+//    Header component styles
+//
+$color-config:    mat.get-color-config($default-theme);
+$primary-palette: map.get($color-config, 'primary');
+
 .app-header {
+    z-index: 10;
+    mat-form-field {
+        max-width: 30rem;
+    }
+    header {
+        z-index: 10;
+    }
     div.mat-mdc-text-field-wrapper {
-    background-color: var(--rm-blue)!important;
-    border: 3px solid var(--rm-dark-blue)!important;
-        border-radius: 50vh;
-        box-shadow: 1px 1px 7px #ffff00, 0 0 25px #14fc07, 0 0 5px #309b03
+        background-color: mat.get-color-from-palette($primary-palette, default)!important;
+        color: mat.get-color-from-palette($primary-palette, default-contrast)!important;
+        border: 3px solid var(--rm-dark-blue) !important;
+        border-radius: 1.5rem;
+        label#mat-mdc-form-field-label-0 {
+            color: mat.get-color-from-palette($primary-palette, default-contrast)!important;
+        }
+    }
+    .mat-focused {
+        div.mat-mdc-text-field-wrapper {
+            box-shadow: 1px 1px 7px #ffff00, 0 0 25px #14fc07, 0 0 5px #309b03;
+        }
+    }
+    .cls-panel-opened {
+        div.mat-mdc-text-field-wrapper {
+            box-shadow: none;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: none;
+        }
     }
 }
+.cls-search-panel {
+    background-color: mat.get-color-from-palette($primary-palette, default)!important;
+    color: mat.get-color-from-palette($primary-palette, default-contrast)!important;
+    border-bottom-left-radius: 1.5rem !important;
+    border-bottom-right-radius: 1.5rem !important;
+    border: 3px solid var(--rm-dark-blue) !important;
+    border-top: none !important;
+    // box-shadow: 1px 1px 7px #ffff00, 0 0 25px #14fc07, 0 0 5px #309b03 !important;
+    .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text{
+        color: mat.get-color-from-palette($primary-palette, default-contrast)!important;
+    }
+    .mat-pseudo-checkbox-checked.mat-pseudo-checkbox-minimal::after, .mat-primary .mat-pseudo-checkbox-indeterminate.mat-pseudo-checkbox-minimal::after {
+        color: mat.get-color-from-palette($primary-palette, default-contrast)!important;
+    }
+}
+//
+//  End header component styles
+
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
-

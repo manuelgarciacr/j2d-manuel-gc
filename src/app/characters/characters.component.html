@@ -1,6 +1,16 @@
-<div>
-    <button (click)="more()">More</button>
-    <p *ngFor="let character of characters">
-        {{character.id}} {{character.name}} {{characters.length}}
-    </p>
+<div class="d-flex flex-wrap justify-content-around gap-3 p-3"
+    infiniteScroll [alwaysCallback]="true" (scrolled)="onScroll()"
+    [style.marginTop]="this._headerHeight() + 'px'">
+    <!-- <button (click)="more()" class="position-absolute top-0 start-0">More</button> -->
+    <!-- <div class="cls-margin-top" ></div> -->
+    <ng-container *ngFor="let character of characters">
+        <app-card [character]=character></app-card>
+    </ng-container>
+    <button *ngIf="showGoUpButton || loading" class="btn no-hidden"
+        [class.btn-danger]="loading"
+        [class.btn-success]="!loading"
+        (click)="showGoUpButton ? scrollTop() : null">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        {{ loading ? "Loading..." : "GO UP"}}
+    </button>
 </div>

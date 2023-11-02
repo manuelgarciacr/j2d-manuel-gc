@@ -1,17 +1,26 @@
-<header class="d-flex justify-content-between align-items-end">
-    <div class="d-flex ms-3 mt-3">
-        <img ngSrc="assets/img/rick.webp" width="210" height="180" class="d-block" priority alt="Rick">
-        <img ngSrc="assets/img/and.webp" width="83" height="180" class="d-block ms-4" priority alt="and">
-        <img ngSrc="assets/img/morty.webp" width="269" height="180" class="d-block ms-4" priority alt="Morty">
+<header class="mat-app-background d-flex justify-content-between align-items-end position-fixed top-0
+    flex-column flex-md-row w-100">
+    <div class="d-flex ms-3 mt-3 w-100">
+        <img ngSrc="assets/img/rick-and-morty.webp" width="562" height="180" class="d-block px-3 cls-rick-and-morty" priority alt="Rick and Morty">
+        <img ngSrc="assets/img/rick.webp" width="210" height="180" class="d-none" priority alt="Rick">
+        <img ngSrc="assets/img/and.webp" width="83" height="180" class="d-none ms-4" priority alt="and">
+        <img ngSrc="assets/img/morty.webp" width="269" height="180" class="d-none ms-4" priority alt="Morty">
     </div>
-    <form class="search-form me-3">
-        <mat-form-field class="full-width">
+    <form class="search-form px-3 d-flex w-100
+        flex-column flex-sm-row
+        justify-content-sm-center align-items-center flex-grow-1">
+        <span>
+            <h2>{{counter}}</h2>
+        </span>
+        <mat-form-field class="full-width flex-grow-1 ms-4" [class.cls-panel-opened]="isPanelOpened">
+
             <mat-label>Find a character</mat-label>
             <input type="text" placeholder="Pick one" aria-label="Character name" matInput [formControl]="nameCtrl"
-                [matAutocomplete]="auto">
+                [matAutocomplete]="auto" class="cls-input">
             <mat-icon matSuffix>search</mat-icon>
-            <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            <mat-autocomplete class="cls-search-panel" (opened)="isPanelOpened=true"
+                (closed)="isPanelOpened=false"#auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredNames | async" [value]="option">
                     {{option}}
                 </mat-option>
             </mat-autocomplete>

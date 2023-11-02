@@ -1,0 +1,20 @@
+<mat-card class="card"
+    [class.cls-click]="clicked==character.id"
+     (click)="clicked = clicked==character.id ? 0 : character.id"
+    (mouseleave)="clicked = 0"
+    role="button"
+    >
+    <mat-card-header>
+        <div mat-card-avatar [style.background-image]="'url(' + character.image + ')'"
+            class="header-image mx-auto">
+        </div>
+    </mat-card-header>
+    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content class="content text-center text-white">
+        <h2>#{{ character.id }} {{ character.name }}</h2>
+        <div>
+            <h2 class="m-0">{{character.species}}</h2>
+            <h2 class="m-0">{{character.origin.name}}</h2>
+        </div>
+    </mat-card-content>
+</mat-card>

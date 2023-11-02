@@ -1,2 +1,2 @@
-<app-header></app-header>
-<app-characters></app-characters>
+<app-header (heightEvent)="getHeaderHeight($event)" (heightEv)="getHeight($event)"></app-header>
+<app-characters  [headerHeight]="height"></app-characters>
