@@ -1,8 +1,10 @@
 # J2dManuelGc
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
+Author: Manuel García Criado
 
-## Development server
+## Angular enviroment
+
+[Angular README.md](./ANGULAR-README.md)
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
