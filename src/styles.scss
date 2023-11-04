@@ -137,6 +137,9 @@ $primary-palette: map.get($color-config, 'primary');
     header {
         z-index: 10;
     }
+    span {
+        top: .5rem;
+    }
     div.mat-mdc-text-field-wrapper {
         background-color: mat.get-color-from-palette($primary-palette, default)!important;
         color: mat.get-color-from-palette($primary-palette, default-contrast)!important;
@@ -180,3 +183,24 @@ $primary-palette: map.get($color-config, 'primary');
 
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
+
+@media (orientation: landscape){
+    /*.portrait{
+        width: 100%;
+    }*/
+    /*div[class^='col-xs'], div[class*='col-xs']{
+        width: 100%;
+    }*/
+    *.flex-land-column {
+        flex-direction: column !important;
+    }
+    *.flex-land-row {
+        flex-direction: row !important;
+    }
+    *.d-land-none {
+        display: none !important;
+    }
+    *.position-land-absolute {
+        position: absolute !important;
+    }
+}

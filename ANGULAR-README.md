@@ -1,14 +1,6 @@
-<div align="right">
-<span>[![Button Example]][Link]</span>
-</div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Button Example]][Link]
+
 # J2dManuelGc
-
-[![Button Example]][Link]
-
-<!----------------------------------------------------------------------------->
-[Link]: README.md 'Link to README.'
-<!---------------------------------[ Buttons ]--------------------------------->
-[Button Example]: https://img.shields.io/badge/Back_to_README-37a779?style=for-the-badge
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
 
@@ -38,19 +30,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 <br>
 <br>
+<!----------------------------------------------------------------------------->
+[Link]: README.md 'Link to README.'
+<!---------------------------------[ Buttons ]--------------------------------->
+[Button Example]: https://img.shields.io/badge/Back_to_README-37a779?style=for-the-badge
 
-
-<!---------------------------------------------------------------------------->
-
-[Button Shield]: https://img.shields.io/badge/Shield_Buttons-37a779?style=for-the-badge
-
-[License]: LICENSE
-[Shield]: Types/Shield.md
-[KBD]: Types/KBD.md
-[#]: #
-
-
-<!---------------------------------[ Badges ]---------------------------------->
-
-[Badge License]: https://img.shields.io/badge/-BY_SA_4.0-ae6c18.svg?style=for-the-badge&labelColor=EF9421&logoColor=white&logo=CreativeCommons
-[Badge Likes]: https://img.shields.io/github/stars/MarkedDown/Buttons?style=for-the-badge&labelColor=d0ab23&color=b0901e&logoColor=white&logo=Trustpilot
