@@ -18,7 +18,7 @@
             <mat-label>Find a character</mat-label>
             <input type="text" placeholder="Pick one" aria-label="Character name" matInput [formControl]="nameCtrl"
                 [matAutocomplete]="auto" class="cls-input">
-            <mat-icon matSuffix (click)="this.nameCtrl.setValue(''); closePanel()" >closed</mat-icon>
+            <mat-icon matSuffix role="button" (click)="this.nameCtrl.setValue(''); closePanel()" >closed</mat-icon>
             <mat-icon matSuffix class="ps-0">search</mat-icon>
             <mat-autocomplete class="cls-search-panel"
                 (opened)="isPanelOpened=true"

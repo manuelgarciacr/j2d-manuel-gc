@@ -1,2 +1,4 @@
-<app-header (heightEvent)="getHeaderHeight($event)" (heightEv)="getHeight($event)"></app-header>
-<app-characters  [headerHeight]="height"></app-characters>
+<div class="d-flex flex-land-row flex-column">
+    <app-header (heightEv)="getHeight($event)"></app-header>
+    <app-characters [headerHeight]="height"></app-characters>
+</div>
