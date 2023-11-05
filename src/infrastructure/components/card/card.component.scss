@@ -1,5 +1,6 @@
 .card {
     width: 20rem;
+    height: 21rem;
     margin-top: 3rem;
     background-color: var(--rm-blue);
     border: 2px solid var(--rm-darkblue);
@@ -17,10 +18,7 @@
         }
     }
     .header-image {
-        //background-image: url(https://material.angular.io/assets/img/examples/shiba1.jpg);
-        //background-image: url({{character.}});
         background-size: cover;
-        /* width: 10rem; */
         height: 14rem;
         width: 14rem;
         margin-top: 0;
