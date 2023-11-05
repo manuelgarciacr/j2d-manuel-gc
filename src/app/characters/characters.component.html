@@ -1,16 +1,14 @@
 <div class="d-flex flex-wrap justify-content-around gap-3 p-3"
     infiniteScroll [alwaysCallback]="true" (scrolled)="onScroll()"
-    [style.marginTop]="this._headerHeight() + 'px'">
-    <!-- <button (click)="more()" class="position-absolute top-0 start-0">More</button> -->
-    <!-- <div class="cls-margin-top" ></div> -->
+    [style.marginTop]="this.headerHeight + 'px'">
     <ng-container *ngFor="let character of characters">
         <app-card [character]=character></app-card>
     </ng-container>
-    <button *ngIf="showGoUpButton || loading" class="btn no-hidden"
-        [class.btn-danger]="loading"
-        [class.btn-success]="!loading"
-        (click)="showGoUpButton ? scrollTop() : null">
-        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-        {{ loading ? "Loading..." : "GO UP"}}
+    <button *ngIf="isFiltering() || showGoUpButton || service.loading"
+        mat-raised-button class="btn no-hidden"
+        [color]="service.loading ? 'warn' : isFiltering() ? 'care' : 'success'"
+        (click)="service.loading ? null : isFiltering() ? loadData() : scrollTop()">
+        <span *ngIf="service.loading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        {{ service.loading ? "Loading..." : isFiltering() ? "Load more..." : "GO UP"}}
     </button>
 </div>

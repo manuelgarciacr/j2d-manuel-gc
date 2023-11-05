@@ -22,6 +22,10 @@ Author: Manuel García Criado
 * Install the required node packages typing: `npm i`
 * Execute the application with the start package JSON script: `npm start`
 
+## Remote deploiment
+
+The application is hosted in GitHub: [https://manuelgarciacr.github.io/j2d-manuel-gc/index](https://manuelgarciacr.github.io/j2d-manuel-gc/index)
+
 ## Application characteristics
 
 ### Header
@@ -38,4 +42,4 @@ Author: Manuel García Criado
  * Subscribes an Observable from a service that emits the downloaded characters requested by the characters component.
  * Filters downloaded characters and emits them from an Observable within the service.
  * Reactively casts the height of the header to the root component (parent of the header and characters components)
-</div>
+
