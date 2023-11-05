@@ -1,5 +1,5 @@
 import { Observable, catchError, map, of, retry, timer } from "rxjs";
-import { IDataAdapter, Params, resp } from "./IDataAdapter";
+import { IHttpAdapter, Params, resp } from "./IHttpAdapter";
 import {
     HttpClient,
     HttpErrorResponse,
@@ -8,6 +8,7 @@ import {
 } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 
+// Options for the HttpClient request
 const httpOptions = {
     headers: new HttpHeaders({
         "Content-Type": "application/json",
@@ -21,29 +22,24 @@ const httpOptions = {
 };
 
 @Injectable()
-export class HttpAdapter<T> implements IDataAdapter<T> {
-    private http = inject(HttpClient);
-    url = "";
-    //private http: HttpClient;
-    // url = "";
+export class HttpAdapter<T> implements IHttpAdapter<T> {
+    private http = inject(HttpClient); // HTTP service
+    url = ""; // URL endpoint. Value injected by the repository
 
-    constructor() {
-        //this.http = inject(HttpClient);
-    }
+    constructor() {}
 
-    // get = (): Observable<resp<T>> =>
-    //     this.http.get<T>(this.url, httpOptions).pipe(
-    //         map(res => {
-    //             const res2: resp<T> = {
-    //                 status: 3, //res.status,
-    //                 message: "msg", //res.message,
-    //                 data: [res],
-    //             };
-    //             return res2; // kind of useless
-    //         }),
-    //         retry({ count: 2, delay: this.shouldRetry }),
-    //         catchError(this.handleError<T>("http get"))
-        // );
+    /**
+     * Obtains a parameter of type string or Params and from these formats the
+     *   'url' and 'parms' parameters requested by the _get function.
+     * If arg is of type string, it is added to the URL (Endpoint of type '/endpoint/:id')
+     * If arg is of type Params (a typescript dictionary), the parameters are placed inside
+     *   an object of type HttpParams. This object, within an HttpClient request, among other
+     *   things, encodes the parameters to be added to the URL as query string parameters
+     *   (Endpoint of type '/endpoint/?key1=value1&key2=value2&...')
+     *
+     * @param arg string or Params, a typescript dictionary with the params to be send
+     * @returns The Observable of type resp<T> returned by the _get function
+     */
     get = (arg?: string | Params): Observable<resp<T>> => {
         let params = new HttpParams(); // Query params
         let url = this.url;
@@ -56,6 +52,15 @@ export class HttpAdapter<T> implements IDataAdapter<T> {
         return this._get(url, params);
     };
 
+    /**
+     * Get HTTP request
+     *
+     * @param url String with destination endpoint
+     * @param params Type HttpParams. Query string parameters to send with the
+     *   application/x-www-form-urlencode MIME type.
+     * @returns An Observable of type <resp<T>> with the response from the server
+     *   or an error description
+     */
     private _get = (url: string, params: HttpParams) =>
         this.http.get<T>(url, { ...httpOptions, params }).pipe(
             map(res => {
@@ -69,41 +74,17 @@ export class HttpAdapter<T> implements IDataAdapter<T> {
             retry({ count: 2, delay: this.shouldRetry }),
             catchError(this.handleError<T>("http get"))
         );
-    // private _get = (url: string, params: HttpParams) =>
-    //     this.http
-    //         .get<resp<T>>(url, { ...httpOptions, params })
-    //         .pipe(
-    //             retry({ count: 2, delay: this.shouldRetry }),
-    //             catchError(this.handleError<T>("http get"))
-    //         );
 
-    // put = (user: T) => {
-    //     return this.http
-    //         .put<resp<T>>(this.url, user, httpOptions)
-    //         .pipe(
-    //             retry({ count: 2, delay: this.shouldRetry }),
-    //             catchError(this.handleError<T>("http put"))
-    //         );
-    // };
-
-    // post = (user: T) => {
-    //     return this.http
-    //         .post<resp<T>>(this.url, user, httpOptions)
-    //         .pipe(
-    //             retry({ count: 2, delay: this.shouldRetry }),
-    //             catchError(this.handleError<T>("http post"))
-    //         );
-    // };
-
-    // delete = (id: string) => {
-    //     return this.http
-    //         .delete<resp<T>>(`${this.url}/${id}`, httpOptions)
-    //         .pipe(
-    //             retry({ count: 2, delay: this.shouldRetry }),
-    //             catchError(this.handleError<T>("http delete"))
-    //         );
-    // };
-
+    /**
+     * This function returns a function that takes an HttpErrorResponse and
+     *   returns an Observable of type resp<T> with the error status, the error
+     *   description, and empty data.
+     * The IHttpAdapter uses this type of response.
+     *
+     * @param operation String with the name or description of the process that
+     *   returned the error
+     * @returns Function of type (HttpErrorResponse) => Observable<resp<T>>
+     */
     private handleError<T>(operation: string) {
         return (error: HttpErrorResponse): Observable<resp<T>> => {
             const status = error.status;
@@ -121,6 +102,7 @@ export class HttpAdapter<T> implements IDataAdapter<T> {
     }
 
     // A custom method to check should retry a request or not
+    // Retry when the status code is not 404
     private shouldRetry(error: HttpErrorResponse) {
         if (error.status != 404) {
             return timer(1000); // Adding a timer from RxJS to return observable<0> to delay param.

@@ -184,7 +184,8 @@ $primary-palette: map.get($color-config, 'primary');
 /* Importing Bootstrap SCSS file. */
 @import "bootstrap/scss/bootstrap";
 
-@media (orientation: landscape){
+
+@media (max-height: 576px){
     /*.portrait{
         width: 100%;
     }*/
